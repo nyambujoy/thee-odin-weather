@@ -25,6 +25,7 @@ function makeTopDivFunc() {
         }
         console.log(city)
         handleFetch(city)
+
         return city
     })
 }
@@ -36,6 +37,73 @@ async function handleFetch(city) {
     const response = await fetch(url)
     const data = await response.json()
     console.log(data)
+    displayDataToScreen(data)
+    return data
 
 
 }
+
+function displayDataToScreen(data) {
+    const dataContainer = document.querySelector('.dataCont');
+    dataContainer.textContent = ''
+
+    const { location: { name, country, localtime }, current } = data
+    const { humidity, temp_c, condition: { text } } = current
+
+    const cityName = document.createElement('h1')
+    cityName.classList.add('cityDs');
+    cityName.textContent = name;
+
+    const countryDs = document.createElement('h2')
+    countryDs.classList.add('countryDs');
+    countryDs.textContent = country;
+
+    const timeDs = document.createElement('p')
+    timeDs.classList.add('timeDs');
+    timeDs.textContent = `local time ${localtime}`;
+
+    const emojiDS = document.createElement('p')
+    emojiDS.classList.add('emojiDS');
+
+    const conditionCode = data.current.condition.code;
+
+
+    const humidityDS = document.createElement('p')
+    humidityDS.classList.add('humDis');
+    humidityDS.textContent = `Humidity ${humidity}%`;
+
+    const tempDS = document.createElement('p')
+    tempDS.classList.add('tempDs');
+    tempDS.textContent = `Temp ${temp_c} \u00B0`;
+
+
+    const descDS = document.createElement('p')
+    descDS.classList.add('descDs');
+    descDS.textContent = text;
+
+    const emoji = getWeatherEmoji(conditionCode);
+    emojiDS.textContent = emoji;
+    dataContainer.append(cityName, countryDs, timeDs, emojiDS, humidityDS, tempDS, descDS)
+
+}
+
+
+
+function getWeatherEmoji(conditionCode) {
+    switch (conditionCode) {
+        case 1000: // Clear (Sunny)
+            return '☀️';
+        case 1003: // Partly cloudy
+            return '⛅';
+        case 1006: // Cloudy
+            return '☁️';
+        case 1087: // Thundery outbreaks in nearby
+            return '⛈️';
+        // Add more cases for other weather conditions as needed
+        default:
+            return '☁️☁️';
+    }
+
+}
+
+
