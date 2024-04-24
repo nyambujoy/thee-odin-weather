@@ -3,6 +3,7 @@ import './css/index.css'
 function createTopDiv() {
     const container = document.querySelector('.card')
     const topDiv = document.createElement('div');
+    topDiv.className = 'topDiv'
     const cityInput = document.createElement('input')
     cityInput.className = 'cityInput'
     cityInput.setAttribute('placeholder', 'enter a city')
@@ -32,13 +33,30 @@ function makeTopDivFunc() {
 makeTopDivFunc()
 
 async function handleFetch(city) {
-    const apiKey = 'df6e716f5f174930b3191204240204';
-    const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
-    const response = await fetch(url)
-    const data = await response.json()
-    console.log(data)
-    displayDataToScreen(data)
-    return data
+    try {
+        const apiKey = 'df6e716f5f174930b3191204240204';
+        const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+        const response = await fetch(url)
+
+
+        if (!response.ok) {
+
+            const dataContainer = document.querySelector('.dataCont');
+            dataContainer.textContent = 'could not find city'
+        }
+
+        const data = await response.json()
+        console.log(data)
+        displayDataToScreen(data)
+        return data
+
+    }
+
+    catch (error) {
+        console.error('Error fetching data:', error)
+    }
+
+
 
 
 }
@@ -46,6 +64,9 @@ async function handleFetch(city) {
 function displayDataToScreen(data) {
     const dataContainer = document.querySelector('.dataCont');
     dataContainer.textContent = ''
+
+    const holderDiv = document.createElement('div')
+    holderDiv.className = 'holderDiv'
 
     const { location: { name, country, localtime }, current } = data
     const { humidity, temp_c, condition: { text } } = current
@@ -60,7 +81,7 @@ function displayDataToScreen(data) {
 
     const timeDs = document.createElement('p')
     timeDs.classList.add('timeDs');
-    timeDs.textContent = `local time ${localtime}`;
+    timeDs.textContent = ` ${localtime}`;
 
     const emojiDS = document.createElement('p')
     emojiDS.classList.add('emojiDS');
@@ -83,7 +104,9 @@ function displayDataToScreen(data) {
 
     const emoji = getWeatherEmoji(conditionCode);
     emojiDS.textContent = emoji;
-    dataContainer.append(cityName, countryDs, timeDs, emojiDS, humidityDS, tempDS, descDS)
+
+    holderDiv.append(cityName, countryDs, timeDs, emojiDS, humidityDS, tempDS, descDS)
+    dataContainer.append(holderDiv)
 
 }
 

@@ -13,9 +13,139 @@
     --beige: #fdf0d5;
     --bluish: #003049;
     --light-bluish: #669bbc;
+    --muddy: #A99F96;
+    --dark-mudddy: #AEA49B;
+    --orange: #D35F24;
+    --dark-orange: #AC3402;
+    --blue: #4C5E68;
+    --light-blue: #949AA8;
+
+
 }
 
 body {
     font-family: "Roboto", sans-serif;
+    background-color: var(--bluish);
+    position: relative;
+
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 50px;
+
+}
+
+.topDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 250px;
+
+}
+
+.cityInput {
+    margin-top: 30px;
+    width: 500px;
+    height: 40px;
+    padding: 20px;
+    outline: none;
+    font-size: 1.7rem;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    /* margin-left: 40px; */
+}
+
+.enterBtn {
+    height: 45px;
+    width: 200px;
+    font-size: 1.9rem;
+    border: 5px solid black;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+
+
+}
+
+.enterBtn:hover {
+    background-color: black;
+    color: white;
+    border: 5px solid white;
+
+
+}
+
+.dataCont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+    min-width: 500px;
+}
+
+.holderDiv {
+    background-color: var(--beige);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    width: 500px;
+    height: 600px;
+    border-radius: 10px;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+.cityDs {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: var(--primary-color);
+
+}
+
+.cityDs:hover {
+    color: var(--primary-color);
+}
+
+.countryDs {
+    font-weight: bold;
+    font-size: 2rem;
+    color: var(--bluish);
+
+}
+
+.timeDs {
+    font-size: 1.4rem;
+    margin: 10px;
+}
+
+.emojiDS {
+
+    font-size: 7rem;
+}
+
+.humDis {
+
+    font-size: 2rem;
+    color: #A99F96;
+}
+
+.tempDs {
+    margin: 10px;
+    font-size: 2.5rem;
+    color: var(--orange);
+
+}
+
+.descDs {
+    margin: 10px;
+    font-size: 1.5rem;
+    font-style: italic;
+
 
 }
