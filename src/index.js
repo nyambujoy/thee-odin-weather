@@ -42,7 +42,10 @@ async function handleFetch(city) {
         if (!response.ok) {
 
             const dataContainer = document.querySelector('.dataCont');
-            dataContainer.textContent = 'could not find city'
+            const errorDs = document.createElement('div')
+            errorDs.textContent = 'could not find city'
+            errorDs.className = 'errorDs'
+            dataContainer.append(errorDs)
         }
 
         const data = await response.json()
@@ -54,12 +57,19 @@ async function handleFetch(city) {
 
     catch (error) {
         console.error('Error fetching data:', error)
+        const dataContainer = document.querySelector('.dataCont');
+        const errorDs = document.createElement('div')
+        errorDs.textContent = 'could not find city'
+        errorDs.className = 'errorDs'
+        dataContainer.append(errorDs)
+
     }
-
-
-
-
 }
+
+
+
+
+
 
 function displayDataToScreen(data) {
     const dataContainer = document.querySelector('.dataCont');
